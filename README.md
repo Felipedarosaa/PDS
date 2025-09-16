@@ -1,28 +1,3 @@
-Com certeza\! Para criar um `README.md` que se destaca no GitHub, a chave é ir além do texto e focar na apresentação visual. Um README "bonito" usa ícones, badges e uma estrutura clara para demonstrar profissionalismo e facilitar a leitura.
-
-Abaixo está uma versão aprimorada da descrição do seu projeto, formatada com um estilo visual moderno e atraente.
-
------
-
-\<div align="center"\>
-\<h1\>Sistema de Controle Financeiro Pessoal\</h1\>
-\<h3\>Desenvolvimento de uma Aplicação Web para Gestão de Receitas e Despesas\</h3\>
-\</div\>
-
-\<br\>
-
-\<div align="center"\>
-\<a href="[https://github.com/seu-usuario/seu-repositorio/blob/main/LICENSE](https://www.google.com/search?q=https://github.com/seu-usuario/seu-repositorio/blob/main/LICENSE)" target="\_blank"\>
-\<img src="[https://img.shields.io/badge/License-MIT-blue.svg](https://www.google.com/search?q=https://img.shields.io/badge/License-MIT-blue.svg)" alt="License: MIT"\>
-\</a\>
-\<img src="[https://img.shields.io/badge/HTML5-E34F26?style=flat\&logo=html5\&logoColor=white](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)" alt="HTML5 Badge"\>
-\<img src="[https://img.shields.io/badge/CSS3-1572B6?style=flat\&logo=css3\&logoColor=white](https://www.google.com/search?q=https://img.shields.io/badge/CSS3-1572B6%3Fstyle%3Dflat%26logo%3Dcss3%26logoColor%3Dwhite)" alt="CSS3 Badge"\>
-\<img src="[https://img.shields.io/badge/JavaScript-F7DF1E?style=flat\&logo=javascript\&logoColor=black](https://www.google.com/search?q=https://img.shields.io/badge/JavaScript-F7DF1E%3Fstyle%3Dflat%26logo%3Djavascript%26logoColor%3Dblack)" alt="JavaScript Badge"\>
-\<img src="[https://img.shields.io/badge/Firebase-FFCA28?style=flat\&logo=firebase\&logoColor=black](https://www.google.com/search?q=https://img.shields.io/badge/Firebase-FFCA28%3Fstyle%3Dflat%26logo%3Dfirebase%26logoColor%3Dblack)" alt="Firebase Badge"\>
-\</div\>
-
------
-
 ### 💻 Resumo do Projeto
 
 Este projeto é uma **aplicação web completa e intuitiva para o controle financeiro pessoal**, desenvolvida como um trabalho de conclusão de curso (TCC). A ferramenta foi concebida para fornecer uma solução simples e eficiente para que usuários possam gerenciar suas finanças, registrar transações, categorizar gastos e visualizar sua saúde financeira através de relatórios visuais.
