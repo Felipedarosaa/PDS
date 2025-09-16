@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Gigatônico - Controle Financeiro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Adicionar favicon de carteira branco -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H80c-8.8 0-16-7.2-16-16s7.2-16 16-16H448c17.7 0 32-14.3 32-32s-14.3-32-32-32H64zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z'/%3E%3C/svg%3E">
+    <!-- Adicionar biblioteca jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Adicionar biblioteca jspdf-autotable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <!-- Adicionar este código logo após o header -->
+    <header>
+        <h1><i class="fas fa-wallet"></i> Projeto Gigatônico</h1>
+        <div class="user-controls">
+            <button id="logout-btn" class="btn-small"><i class="fas fa-sign-out-alt"></i> Sair</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="balance-container">
+            <div class="balance-card total">
+                <h2>Saldo Total</h2>
+                <p id="balance">R$ 0,00</p>
+            </div>
+            <div class="balance-card income">
+                <h2>Receitas</h2>
+                <p id="income">R$ 0,00</p>
+            </div>
+            <div class="balance-card expense">
+                <h2>Despesas</h2>
+                <p id="expense">R$ 0,00</p>
+            </div>
+        </section>
+
+        <section class="transaction-container">
+            <h2>Nova Transação</h2>
+            <form id="transaction-form">
+                <div class="form-group">
+                    <label for="transaction-type">Tipo de Transação</label>
+                    <div class="transaction-type-selector">
+                        <button type="button" id="income-btn" class="type-btn active"><i class="fas fa-arrow-up"></i> Entrada</button>
+                        <button type="button" id="expense-btn" class="type-btn"><i class="fas fa-arrow-down"></i> Saída</button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Descrição</label>
+                    <input type="text" id="description" placeholder="Descrição da transação" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Valor (R$)</label>
+                    <input type="number" id="amount" step="0.01" placeholder="0.00" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Categoria</label>
+                    <select id="category" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <!-- Categorias serão carregadas dinamicamente via JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Data</label>
+                    <input type="date" id="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Observações (opcional)</label>
+                    <textarea id="notes" placeholder="Observações adicionais"></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Adicionar Transação</button>
+            </form>
+        </section>
+
+        <section class="history-container">
+            <h2>Histórico de Transações</h2>
+            <div class="filter-container">
+                <div class="search-box">
+                    <input type="text" id="search" placeholder="Buscar transação...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-options">
+                    <select id="filter-category">
+                        <option value="all">Todas as categorias</option>
+                        <!-- Categorias serão carregadas dinamicamente via JavaScript -->
+                    </select>
+                    <select id="filter-type">
+                        <option value="all">Todos os tipos</option>
+                        <option value="income">Receitas</option>
+                        <option value="expense">Despesas</option>
+                    </select>
+                    <div class="date-filter">
+                        <label for="filter-date-start">De:</label>
+                        <input type="date" id="filter-date-start">
+                        <label for="filter-date-end">Até:</label>
+                        <input type="date" id="filter-date-end">
+                    </div>
+                </div>
+            </div>
+            <ul id="transaction-list" class="transaction-list">
+                <!-- Transações serão adicionadas dinamicamente via JavaScript -->
+            </ul>
+        </section>
+
+        <!-- Adicionar após a seção de histórico de transações e antes do dashboard -->
+        <section class="category-totals">
+            <h2>Totais por Categoria</h2>
+            <div class="category-totals-tabs">
+                <div class="category-tab active" data-type="expense">Despesas</div>
+                <div class="category-tab" data-type="income">Receitas</div>
+            </div>
+            <div class="category-content active" id="expense-categories">
+                <div class="category-list" id="expense-category-list">
+                    <!-- Categorias de despesas serão adicionadas dinamicamente -->
+                </div>
+            </div>
+            <div class="category-content" id="income-categories">
+                <div class="category-list" id="income-category-list">
+                    <!-- Categorias de receitas serão adicionadas dinamicamente -->
+                </div>
+            </div>
+        </section>
+        <section class="dashboard-container">
+            <h2>Dashboard</h2>
+            <div class="chart-container">
+                <div class="chart">
+                    <h3>Despesas por Categoria</h3>
+                    <canvas id="expense-chart"></canvas>
+                </div>
+                <div class="chart">
+                    <h3>Receitas vs Despesas</h3>
+                    <canvas id="income-expense-chart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Projeto Gigatônico - Felipe Valim. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Adicionar este script no final do body, antes dos outros scripts -->
+    <script>
+        // Redirecionar para a tela de boas-vindas se não houver parâmetros na URL
+        if (!window.location.search) {
+            window.location.href = 'welcome.html';
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    
+    <!-- Script de diagnóstico do Firebase - Remover após depuração -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('=== DIAGNÓSTICO DO FIREBASE ===');
+            console.log('Firebase inicializado:', typeof firebase !== 'undefined');
+            console.log('Firebase Auth disponível:', typeof firebase.auth !== 'undefined');
+            console.log('Firebase Firestore disponível:', typeof firebase.firestore !== 'undefined');
+            
+            // Aguardar a inicialização completa do Firebase Auth
+            await new Promise(resolve => {
+                const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+                    unsubscribe();
+                    resolve(user);
+                });
+                
+                // Timeout de segurança após 3 segundos
+                setTimeout(() => resolve(null), 3000);
+            });
+            
+            try {
+                // Verificar autenticação
+                console.log('Verificando autenticação...');
+                const user = firebase.auth().currentUser;
+                if (user) {
+                    console.log('Usuário autenticado:', user.uid);
+                    console.log('Email do usuário:', user.email);
+                    console.log('Método de autenticação:', user.providerData[0].providerId);
+                } else {
+                    console.log('Nenhum usuário autenticado, redirecionando para a página de login...');
+                    window.location.href = 'welcome.html';
+                    return;
+                }
+                
+                // Verificar acesso ao Firestore
+                console.log('Verificando acesso ao Firestore...');
+                const testDoc = await firebase.firestore().collection('users').doc(user.uid).collection('test').doc('test').set({
+                    timestamp: new Date().toISOString(),
+                    test: 'Teste de acesso ao Firestore'
+                });
+                console.log('Teste de escrita no Firestore bem-sucedido');
+                
+                // Ler o documento de teste
+                const docSnapshot = await firebase.firestore().collection('users').doc(user.uid).collection('test').doc('test').get();
+                console.log('Teste de leitura do Firestore:', docSnapshot.exists ? 'Sucesso' : 'Falha');
+                if (docSnapshot.exists) {
+                    console.log('Dados do documento:', docSnapshot.data());
+                }
+                
+                console.log('=== DIAGNÓSTICO CONCLUÍDO COM SUCESSO ===');
+            } catch (error) {
+                console.error('ERRO NO DIAGNÓSTICO DO FIREBASE:', error);
+                alert('Erro na configuração do Firebase: ' + error.message);
+            }
+        });
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,2026 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --light-color: #ecf0f1;
+    --dark-color: #34495e;
+    --text-color: #333;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    
+    /* Novas variáveis para gradientes */
+    --primary-gradient: linear-gradient(135deg, #2c3e50, #1a252f);
+    --secondary-gradient: linear-gradient(135deg, #3498db, #2980b9);
+    --success-gradient: linear-gradient(135deg, #2ecc71, #27ae60);
+    --danger-gradient: linear-gradient(135deg, #e74c3c, #c0392b);
+    --warning-gradient: linear-gradient(135deg, #f39c12, #d35400);
+    --card-bg: #ffffff;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f5f7fa;
+    background-image: linear-gradient(to bottom, #f5f7fa, #eef2f7);
+    min-height: 100vh;
+}
+
+/* Adicionar estes estilos para o botão de logout */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    animation: headerSlideDown 0.5s ease-out;
+}
+
+@keyframes headerSlideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-small {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-small:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Modificar o estilo do header para permitir centralização do título */
+header {
+    background: var(--primary-gradient);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    box-shadow: var(--box-shadow);
+}
+
+/* Centralizar o título */
+header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+header h1 i {
+    margin-right: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    margin-bottom: 2.5rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Balance Cards */
+.balance-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animação para novas transações */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.transaction-item {
+    animation: fadeInDown 0.5s ease-out;
+}
+
+/* Estilo para quando não há transações */
+.no-transactions {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border: 1px dashed #ddd;
+}
+
+.balance-card {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    color: white;
+    transition: var(--transition);
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.balance-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.balance-card:hover::before {
+    transform: translateX(0);
+}
+
+.balance-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--hover-shadow);
+}
+
+.balance-card h2 {
+    color: white;
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.balance-card h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.balance-card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.balance-card.total {
+    background: var(--primary-gradient);
+}
+
+.balance-card.income {
+    background: var(--success-gradient);
+}
+
+.balance-card.expense {
+    background: var(--danger-gradient);
+}
+
+.balance-card i {
+    font-size: 2.5rem;
+    opacity: 0.2;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Form Styles */
+small {
+    display: block;
+    color: #777;
+    margin-top: 0.3rem;
+}
+
+/* Melhorias no botão de adicionar transação */
+.btn {
+    background: var(--secondary-gradient);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.btn:hover::before {
+    transform: translateX(100%);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+/* Melhorias no select de categorias */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+/* Transaction List */
+.filter-container {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-box input {
+    padding-right: 2.5rem;
+}
+
+.search-box i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-options select {
+    min-width: 150px;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.date-filter input {
+    width: 150px;
+}
+
+/* Adicionar após as regras existentes da transaction-list */
+
+/* Estilo moderno para a lista de transações */
+.transaction-list {
+    list-style: none;
+    max-height: 500px; /* Aumentado para mostrar mais transações */
+    overflow-y: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background-color: white;
+    padding: 0;
+    position: relative;
+}
+
+.transaction-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.transaction-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.transaction-list::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+}
+
+.transaction-list::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-bottom: none;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Linha colorida separando as transações */
+.transaction-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(0, 0, 0, 0.1) 50%, 
+        rgba(255, 255, 255, 0) 100%);
+}
+
+/* Barra lateral colorida indicando o tipo de transação */
+.transaction-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    border-radius: 3px 0 0 3px;
+    transition: all 0.3s ease;
+}
+
+.transaction-item.income::before {
+    background: linear-gradient(to bottom, var(--success-color), #27ae60);
+}
+
+.transaction-item.expense::before {
+    background: linear-gradient(to bottom, var(--danger-color), #c0392b);
+}
+
+.transaction-item:hover {
+    transform: translateY(-3px) translateX(3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background-color: #f9fafc;
+}
+
+.transaction-item:hover::before {
+    width: 8px;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.transaction-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.transaction-info h3 i {
+    margin-right: 10px;
+    font-size: 1rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f4f8;
+    border-radius: 50%;
+    color: var(--primary-color);
+}
+
+.transaction-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #777;
+    align-items: center;
+}
+
+.transaction-meta span {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.transaction-meta span:hover {
+    background-color: #eef1f5;
+}
+
+.transaction-meta span i {
+    margin-right: 5px;
+    opacity: 0.7;
+}
+
+.transaction-category {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background-color: #f0f0f0;
+    color: var(--dark-color);
+    transition: var(--transition);
+}
+
+.transaction-category.income {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(39, 174, 96, 0.25));
+    color: var(--success-color);
+}
+
+.transaction-category.expense {
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(192, 57, 43, 0.25));
+    color: var(--danger-color);
+}
+
+.transaction-amount {
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    min-width: 120px;
+    text-align: right;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.transaction-amount::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.transaction-amount:hover::before {
+    transform: translateX(100%);
+}
+
+.transaction-amount.income {
+    color: var(--success-color);
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.2));
+}
+
+.transaction-amount.expense {
+    color: var(--danger-color);
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(192, 57, 43, 0.2));
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-left: 1rem;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.transaction-item:hover .transaction-actions {
+    opacity: 1;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background-color: #f5f5f5;
+    color: #555;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn.edit:hover {
+    color: white;
+    background: linear-gradient(135deg, var(--warning-color), #d35400);
+}
+
+.action-btn.delete:hover {
+    color: white;
+    background: linear-gradient(135deg, var(--danger-color), #c0392b);
+}
+
+/* Estilos para os totais por categoria - Versão modernizada */
+.category-totals {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.category-totals h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    color: #333;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.category-totals h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border-radius: 2px;
+}
+
+/* Estilos modernos para as abas de categoria (Despesas/Receitas) */
+.category-totals-tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    background-color: #f0f4f8;
+    padding: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-tab {
+    flex: 1;
+    text-align: center;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    z-index: 1;
+}
+
+.category-tab:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.category-tab:hover:before {
+    width: 80%;
+}
+
+.category-tab:first-child {
+    color: var(--danger-color);
+}
+
+.category-tab:first-child::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.category-tab:last-child {
+    color: var(--success-color);
+}
+
+.category-tab.active {
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.category-tab.active:before {
+    width: 80%;
+}
+
+.category-tab i {
+    font-size: 1.1rem;
+}
+
+/* Melhorias nos cards de categoria */
+.category-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 5px;
+    /* Scrollbar personalizada */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.category-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.category-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.category-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+/* Estilo para os subgrupos */
+.category-subgroup-header {
+    grid-column: 1 / -1; /* Ocupa toda a linha */
+    padding: 14px 18px;
+    margin-top: 15px;
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-radius: 10px;
+    border-left: 4px solid #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    animation: fadeInDown 0.5s ease forwards;
+}
+
+.category-subgroup-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.category-subgroup-header .category-info {
+    display: flex;
+    align-items: center;
+}
+
+.category-subgroup-header .category-icon {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.2));
+    color: #007bff;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+}
+
+.category-subgroup-header .category-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid transparent;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.category-card.income {
+    border-left-color: transparent;
+}
+
+.category-card.income::before {
+    background: linear-gradient(to bottom, #28a745, #20c997);
+}
+
+.category-card.expense {
+    border-left-color: transparent;
+}
+
+.category-card.expense::before {
+    background: linear-gradient(to bottom, #dc3545, #fd7e14);
+}
+
+.subgroup-item {
+    margin-left: 15px; /* Adicionar margem à esquerda para indicar hierarquia */
+    background-color: #f9f9f9;
+    border-left: none;
+}
+
+/* Melhorias nos ícones de categoria */
+.category-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f0f4f8, #e9ecef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    font-size: 1.2rem;
+    flex-shrink: 0; /* Evita que o ícone encolha */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.1);
+}
+
+.category-name {
+    font-weight: 500;
+    flex-grow: 1; /* Permite que o nome cresça */
+    word-break: break-word; /* Quebra palavras longas */
+    color: #444;
+}
+
+.category-amount {
+    font-weight: bold;
+    font-size: 1.1rem;
+    white-space: nowrap; /* Evita quebra de linha no valor */
+    margin-left: 10px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.income .category-amount {
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.expense .category-amount {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.category-card:hover .category-amount {
+    transform: scale(1.05);
+}
+
+/* Melhorias na mensagem de sem dados */
+.no-data-message {
+    grid-column: 1 / -1; /* Ocupa toda a linha */
+    text-align: center;
+    color: #777;
+    padding: 2rem;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px dashed #ddd;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.no-data-message.subgroup-item {
+    margin-left: 15px;
+    padding: 1.2rem;
+    background-color: #f5f5f5;
+}
+
+/* Animações */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .category-list {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+        max-height: 400px;
+    }
+    
+    .category-card {
+        padding: 1rem;
+    }
+    
+    .category-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+    
+    .category-name {
+        font-size: 0.95rem;
+    }
+    
+    .category-amount {
+        font-size: 1rem;
+        padding: 4px 10px;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+    main {
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
+    
+    section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Ajustes específicos para os cards de saldo em telas pequenas */
+    .balance-container {
+        gap: 1rem;
+    }
+    
+    .balance-card {
+        padding: 1rem;
+    }
+    
+    .balance-card h2 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .balance-card p {
+        font-size: 1.5rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Ajustes para o título do período */
+    .period-title {
+        font-size: 1rem;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+    }
+    
+    /* Ajustes para o botão de selecionar outro período */
+    #back-to-select {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+        margin: 0.5rem auto;
+    }
+    
+    /* Ajustes existentes */
+    .transaction-info h3 {
+        font-size: 1rem;
+    }
+    
+    .transaction-meta {
+        font-size: 0.8rem;
+    }
+    
+    .transaction-amount {
+        font-size: 1rem;
+    }
+    
+    .action-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* Ajustes para o botão de relatório em telas muito pequenas */
+    .period-title span {
+        font-size: 1rem;
+    }
+    
+    .report-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Adicionar regras específicas para telas extremamente pequenas */
+@media (max-width: 360px) {
+    .balance-card p {
+        font-size: 1.3rem;
+    }
+    
+    .period-title {
+        font-size: 0.9rem;
+    }
+    
+    #back-to-select {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+    
+    header h1 {
+        font-size: 1.3rem;
+    }
+}
+
+.category-card.income .category-amount {
+    color: var(--success-color);
+}
+
+.category-card.expense .category-amount {
+    color: var(--danger-color);
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #777;
+    transition: var(--transition);
+}
+
+.action-btn:hover {
+    color: var(--primary-color);
+}
+
+.action-btn.edit:hover {
+    color: var(--warning-color);
+}
+
+.action-btn.delete:hover {
+    color: var(--danger-color);
+}
+
+/* Dashboard */
+.dashboard-container {
+    animation: fadeIn 1s ease-out;
+}
+
+.chart-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.chart {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    min-height: 400px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.chart::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--secondary-gradient);
+    opacity: 0.7;
+}
+
+.chart:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.chart h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.chart h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: var(--secondary-gradient);
+}
+
+.chart canvas {
+    max-height: 300px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.no-data-message {
+    text-align: center;
+    color: #777;
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: var(--primary-color);
+    color: white;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 0 1rem;
+    }
+    
+    .balance-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .balance-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Ajustes para os itens de transação */
+    .transaction-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    
+    .transaction-info {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .transaction-meta {
+        margin-bottom: 0.8rem;
+        width: 100%;
+    }
+    
+    .transaction-amount {
+        align-self: flex-start;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .transaction-actions {
+        margin-top: 0.5rem;
+        align-self: flex-end;
+        margin-left: 0;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+    }
+    
+    .search-box {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .filter-options {
+        width: 100%;
+    }
+}
+
+/* Adicionar no final do arquivo */
+
+/* Estilos para o botão de voltar e título do período */
+#back-to-select {
+    display: block;
+    max-width: 300px;
+    margin: 2.5rem auto 2rem; /* Aumentado o espaço na margem inferior */
+    background-color: var(--secondary-color);
+}
+
+#back-to-select:hover {
+    background-color: var(--primary-color);
+}
+
+.period-title {
+    display: flex;
+    justify-content: center; /* Alterado para center para centralizar o conteúdo */
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 2rem 0 1rem; /* Aumentado o espaço na margem superior */
+    padding: 1.5rem 1.5rem;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    position: relative; /* Mantido para posicionamento do botão */
+}
+
+/* Adicionar estilo para o texto do período */
+.period-title span {
+    position: absolute; /* Posicionamento absoluto */
+    left: 50%; /* Posiciona no meio horizontal */
+    transform: translateX(-50%); /* Centraliza perfeitamente */
+    text-align: center; /* Garante que o texto esteja centralizado */
+}
+
+.report-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    width: 50px; /* Largura fixa para formato circular */
+    height: 50px; /* Altura fixa para formato circular */
+    border-radius: 50%; /* Torna o botão circular */
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Posicionamento absoluto */
+    right: 20px; /* Distância da direita */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para destacar o botão */
+}
+
+.report-btn i {
+    margin: 0; /* Remove margens do ícone */
+}
+
+.report-btn span {
+    display: none; /* Oculta o texto e deixa apenas o ícone */
+}
+
+.report-btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.1); /* Efeito de aumento ao passar o mouse */
+}
+
+/* Estilos modernizados para o formulário de Nova Transação */
+.transaction-container {
+    animation: fadeIn 0.8s ease-out;
+    border-radius: 12px;
+    background-color: var(--card-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.transaction-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--success-color), var(--secondary-color), var(--danger-color));
+    background-size: 300% 100%;
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+.transaction-container:hover {
+    box-shadow: var(--hover-shadow);
+}
+
+.transaction-container h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+    position: relative;
+    padding-bottom: 0.8rem;
+    display: inline-block;
+}
+
+.transaction-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-color), transparent);
+    border-radius: 3px;
+}
+
+/* Melhorias nos grupos de formulário */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.form-group:hover label {
+    color: var(--secondary-color);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+/* Melhorias nos campos de entrada */
+input, select, textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+input:hover, select:hover, textarea:hover {
+    border-color: #bbb;
+    background-color: #f5f5f5;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2), inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    background-color: white;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+    border-radius: 10px;
+}
+
+/* Melhorias nos seletores de tipo de transação */
+.transaction-type-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    position: relative;
+    padding: 3px;
+    background-color: #f0f4f8;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.type-btn {
+    flex: 1;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: transparent;
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.type-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+    z-index: -1;
+}
+
+.type-btn:hover::before {
+    transform: translateX(100%);
+}
+
+.type-btn i {
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.type-btn.active {
+    color: white;
+    font-weight: 600;
+    transform: translateY(-2px);
+}
+
+.type-btn.active i {
+    transform: scale(1.2);
+}
+
+#income-btn.active {
+    background: var(--success-gradient);
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+}
+
+#expense-btn.active {
+    background: var(--danger-gradient);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+/* Estilos para subgrupos de categorias */
+.category-subgroup-header {
+    padding: 10px 15px;
+    margin-top: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border-left: 4px solid #007bff;
+}
+
+.category-subgroup-header .category-name {
+    font-size: 1.1em;
+}
+
+.subgroup-item {
+    margin-left: 20px;
+    border-left: 2px solid #e9ecef;
+}
+
+/* Estilos modernos para as abas de categoria (Despesas/Receitas) */
+.category-totals-tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
+    background-color: #f0f4f8;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.category-tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.category-tab:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.category-tab:hover:before {
+    width: 80%;
+}
+
+.category-tab:first-child {
+    color: var(--danger-color);
+}
+
+.category-tab:last-child {
+    color: var(--success-color);
+}
+
+.category-tab.active {
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-tab.active:before {
+    width: 80%;
+}
+
+/* Adicionar ícones aos botões */
+.category-tab[data-type="expense"]:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f0d6";
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    margin-right: 0.5rem;
+    font-weight: 900;
+}
+
+.category-tab[data-type="income"]:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f0d6";
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    margin-right: 0.5rem;
+    font-weight: 900;
+}
+
+/* Melhorias de Responsividade para Dispositivos Móveis */
+@media (max-width: 768px) {
+    /* Ajustes para os filtros */
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    
+    .filter-options {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .filter-options select {
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+    
+    .date-filter {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .date-filter input {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Ajustes para o formulário */
+    .transaction-container {
+        padding: 1.5rem;
+    }
+    
+    .transaction-container h2 {
+        font-size: 1.4rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+    
+    input, select, textarea {
+        padding: 0.8rem;
+        font-size: 16px; /* Evita zoom automático em iOS */
+    }
+    
+    .transaction-type-selector {
+        flex-direction: row;
+    }
+    
+    .type-btn {
+        padding: 10px 0;
+    }
+    
+    .btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+    }
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-options select {
+    min-width: 150px;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.date-filter input {
+    width: 150px;
+}
+
+/* Adicionar após as regras existentes da transaction-list */
+
+/* Estilo moderno para a lista de transações */
+.transaction-list {
+    list-style: none;
+    max-height: 500px; /* Aumentado para mostrar mais transações */
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    border-bottom: 1px solid #eee;
+    transition: var(--transition);
+    position: relative;
+}
+
+.transaction-item:hover {
+    background-color: #f5f9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+    display: flex;
+    align-items: center;
+}
+
+.transaction-info h3 i {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.transaction-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #777;
+    align-items: center;
+}
+
+.transaction-meta span {
+    display: flex;
+    align-items: center;
+}
+
+.transaction-meta span i {
+    margin-right: 5px;
+    opacity: 0.7;
+}
+
+.transaction-category {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background-color: #f0f0f0;
+    color: var(--dark-color);
+    transition: var(--transition);
+}
+
+.transaction-category.income {
+    background-color: rgba(46, 204, 113, 0.15);
+    color: var(--success-color);
+}
+
+.transaction-category.expense {
+    background-color: rgba(231, 76, 60, 0.15);
+    color: var(--danger-color);
+}
+
+.transaction-amount {
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    min-width: 100px;
+    text-align: right;
+}
+
+.transaction-amount.income {
+    color: var(--success-color);
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.transaction-amount.expense {
+    color: var(--danger-color);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-left: 1rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    background-color: #f5f5f5;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+.action-btn.edit:hover {
+    color: white;
+    background-color: var(--warning-color);
+}
+
+.action-btn.delete:hover {
+    color: white;
+    background-color: var(--danger-color);
+}
+
+/* Estilos para os totais por categoria - Versão melhorada */
+.category-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+/* Estilo para os subgrupos */
+.category-subgroup-header {
+    grid-column: 1 / -1; /* Ocupa toda a linha */
+    padding: 12px 15px;
+    margin-top: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.category-subgroup-header .category-info {
+    display: flex;
+    align-items: center;
+}
+
+.category-subgroup-header .category-icon {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+.category-subgroup-header .category-name {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+/* Melhorias nos cards de categoria */
+.category-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid transparent;
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-card.income {
+    border-left-color: var(--success-color);
+}
+
+.category-card.expense {
+    border-left-color: var(--danger-color);
+}
+
+.subgroup-item {
+    margin-left: 0; /* Remover margem à esquerda */
+    border-left: none; /* Remover borda à esquerda */
+    background-color: #f9f9f9;
+}
+
+/* Melhorias nos ícones de categoria */
+.category-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 1.2rem;
+    flex-shrink: 0; /* Evita que o ícone encolha */
+}
+
+.category-name {
+    font-weight: 500;
+    flex-grow: 1; /* Permite que o nome cresça */
+    word-break: break-word; /* Quebra palavras longas */
+}
+
+.category-amount {
+    font-weight: bold;
+    font-size: 1.1rem;
+    white-space: nowrap; /* Evita quebra de linha no valor */
+    margin-left: 10px;
+}
+
+/* Melhorias na mensagem de sem dados */
+.no-data-message.subgroup-item {
+    grid-column: 1 / -1; /* Ocupa toda a linha */
+    text-align: center;
+    color: #777;
+    padding: 1rem;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .category-list {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+    }
+    
+    .category-card {
+        padding: 0.8rem;
+    }
+    
+    .category-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .category-name {
+        font-size: 0.9rem;
+    }
+    
+    .category-amount {
+        font-size: 1rem;
+    }
+}
+
+.category-card.income .category-amount {
+    color: var(--success-color);
+}
+
+.category-card.expense .category-amount {
+    color: var(--danger-color);
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #777;
+    transition: var(--transition);
+}
+
+.action-btn:hover {
+    color: var(--primary-color);
+}
+
+.action-btn.edit:hover {
+    color: var(--warning-color);
+}
+
+.action-btn.delete:hover {
+    color: var(--danger-color);
+}

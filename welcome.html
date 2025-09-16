@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao Projeto Gigatônico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/welcome.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Adicionar favicon de carteira branco -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H80c-8.8 0-16-7.2-16-16s7.2-16 16-16H448c17.7 0 32-14.3 32-32s-14.3-32-32-32H64zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z'/%3E%3C/svg%3E">
+</head>
+<body>
+    <div class="welcome-page">
+        <header>
+            <h1><i class="fas fa-wallet"></i> Projeto Gigatônico</h1>
+        </header>
+
+        <main>
+            <section class="welcome-container">
+                <div class="welcome-content">
+                    <h2 class="welcome-title">Controle Financeiro Inteligente</h2>
+                    <p class="welcome-subtitle">Transforme sua relação com o dinheiro e alcance seus objetivos financeiros</p>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Acompanhe seus gastos</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-piggy-bank"></i>
+                            <span>Economize mais</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Relatórios detalhados</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="auth-container">
+                    <div class="auth-tabs">
+                        <button id="login-tab" class="auth-tab active">Login</button>
+                        <button id="register-tab" class="auth-tab">Registrar</button>
+                    </div>
+                    
+                    <!-- Formulário de Login -->
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="login-email" placeholder="Seu email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password">Senha</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="login-password" placeholder="Sua senha" required>
+                            </div>
+                        </div>
+                        
+                        <div id="login-error" class="error-message"></div>
+                        
+                        <button type="submit" class="btn btn-login">Entrar <i class="fas fa-arrow-right"></i></button>
+                        
+                        <!-- Opção de login com Google abaixo do botão principal -->
+                        <div class="social-login">
+                          <p class="divider">Ou continue com</p>
+                          <button type="button" class="btn-social btn-google-circle" onclick="signInWithGoogle()">
+                            <i class="fab fa-google"></i>
+                          </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Formulário de Registro -->
+                    <form id="register-form" class="auth-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="register-email" placeholder="Seu email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-password">Senha</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="register-password" placeholder="Sua senha (mínimo 6 caracteres)" required minlength="6">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirmar Senha</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="register-confirm-password" placeholder="Confirme sua senha" required minlength="6">
+                            </div>
+                        </div>
+                        
+                        <div id="register-error" class="error-message"></div>
+                        
+                        <button type="submit" class="btn btn-login">Registrar <i class="fas fa-user-plus"></i></button>
+                    </form>
+                </div>
+                
+                <div id="period-selector" style="display: none;">
+                    <p class="welcome-text">Selecione o período que deseja visualizar:</p>
+                    
+                    <div class="date-selector">
+                        <div class="form-group">
+                            <label for="year-select">Ano</label>
+                            <select id="year-select">
+                                <!-- Anos serão carregados dinamicamente via JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="month-select">Mês</label>
+                            <select id="month-select">
+                                <option value="0">Janeiro</option>
+                                <option value="1">Fevereiro</option>
+                                <option value="2">Março</option>
+                                <option value="3">Abril</option>
+                                <option value="4">Maio</option>
+                                <option value="5">Junho</option>
+                                <option value="6">Julho</option>
+                                <option value="7">Agosto</option>
+                                <option value="8">Setembro</option>
+                                <option value="9">Outubro</option>
+                                <option value="10">Novembro</option>
+                                <option value="11">Dezembro</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button id="view-transactions" class="btn">Visualizar Transações</button>
+                    <button id="logout-btn" class="btn btn-outline">Sair</button>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="welcome-footer">
+            <p>&copy; 2025 Projeto Gigatônico - Felipe Valim. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/welcome.js"></script>
+</body>
+</html>
