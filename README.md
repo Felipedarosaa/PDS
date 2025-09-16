@@ -1,61 +1,70 @@
-# PDS
-Desenvolvimento de uma Aplicação Web para Gestão de Receitas e Despesas
+<div align="center">
+<h1>Sistema de Controle Financeiro Pessoal</h1>
+<h3>Desenvolvimento de uma Aplicação Web para Gestão de Receitas e Despesas</h3>
+</div>
 
-Resumo do Projeto
+<br>
+
+<div align="center">
+<a href="https://github.com/seu-usuario/seu-repositorio/blob/main/LICENSE" target="_blank">
+<img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
+</a>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white" alt="HTML5 Badge">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white" alt="CSS3 Badge">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JavaScript Badge">
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black" alt="Firebase Badge">
+</div>
+
+💻 Resumo do Projeto
 Este projeto é uma aplicação web completa e intuitiva para o controle financeiro pessoal, desenvolvida como um trabalho de conclusão de curso (TCC). A ferramenta foi concebida para fornecer uma solução simples e eficiente para que usuários possam gerenciar suas finanças, registrar transações, categorizar gastos e visualizar sua saúde financeira através de relatórios visuais.
 
 Construído com tecnologias web modernas, o projeto demonstra a aplicação de conceitos de engenharia de software e a viabilidade de utilizar plataformas BaaS (Backend as a Service) para a criação de soluções escaláveis e robustas.
 
-Funcionalidades Principais
+✨ Funcionalidades Principais
 O sistema foi projetado com um foco rigoroso em usabilidade e oferece as seguintes funcionalidades-chave:
 
 ✅ Autenticação Segura: Sistema de login e registro de usuários integrado ao Firebase Authentication.
 
-✅ Gerenciamento de Transações (CRUD): Permite adicionar, editar e excluir receitas e despesas de forma simples.
+📊 Relatórios Visuais: Dashboards dinâmicos com gráficos de pizza e barras para uma análise visual e instantânea do fluxo financeiro.
 
-✅ Categorização Hierárquica: Organização de transações em categorias e subcategorias personalizáveis.
+📝 Gerenciamento de Transações (CRUD): Adicione, edite e exclua receitas e despesas de forma intuitiva.
 
-✅ Dashboards Visuais: Gráficos interativos (pizza e barras) para uma análise visual e instantânea do fluxo financeiro.
+📂 Categorização Hierárquica: Organize transações em categorias e subcategorias personalizáveis.
 
-✅ Filtros Avançados: Filtre transações por data, tipo, categoria ou descrição para uma análise detalhada.
+🔍 Filtros Avançados: Filtre transações por data, tipo, categoria ou descrição para uma análise detalhada.
 
-✅ Geração de Relatórios: Exporte relatórios financeiros completos em formato PDF.
+📄 Geração de Relatórios: Exporte resumos financeiros completos em formato PDF.
 
-✅ Design Responsivo: Interface otimizada para desktops, tablets e smartphones.
+📱 Design Responsivo: Interface otimizada para desktops, tablets e smartphones.
 
-Tecnologias Utilizadas
+🚀 Tecnologias Utilizadas
 O projeto foi desenvolvido com um stack tecnológico moderno e eficiente, priorizando a performance e a manutenibilidade do código.
 
 Frontend:
 
-HTML5: Estrutura semântica da aplicação.
+HTML5
 
-CSS3: Estilização e responsividade da interface (Flexbox e Grid).
+CSS3
 
-JavaScript (Vanilla): Lógica de negócio e interatividade.
+JavaScript (Vanilla)
 
 Backend as a Service (BaaS):
 
-Firebase: Plataforma do Google utilizada para:
+Firebase
 
-Firebase Authentication: Gerenciamento de autenticação de usuários.
+Firebase Authentication
 
-Cloud Firestore: Banco de dados NoSQL para persistência dos dados.
+Cloud Firestore
 
-Firebase Hosting: Hospedagem da aplicação.
+Firebase Hosting
 
-Metodologia de Desenvolvimento
-Este projeto seguiu um modelo de ciclo de vida incremental, dividindo o desenvolvimento em fases claras:
+Ferramentas:
 
-Análise de Requisitos: Levantamento de necessidades do usuário e definição de requisitos funcionais e não-funcionais.
+Git
 
-Design da Solução: Criação da arquitetura, modelagem de dados e prototipação da interface (UI/UX).
+Visual Studio Code
 
-Implementação: Desenvolvimento modular e incremental das funcionalidades.
-
-Testes e Validação: Condução de testes funcionais e de usabilidade para garantir a qualidade e a eficácia da solução.
-
-Como Executar o Projeto Localmente
+🛠️ Como Executar o Projeto Localmente
 Para clonar e executar este projeto em sua máquina, siga os passos abaixo:
 
 Clone o Repositório:
@@ -68,29 +77,30 @@ Configurar o Firebase:
 
 Crie um projeto no console do Firebase.
 
-Adicione um aplicativo web ao seu projeto Firebase e copie suas credenciais de configuração.
+Adicione um aplicativo web e copie suas credenciais de configuração.
 
 Crie um arquivo firebaseConfig.js no diretório raiz do projeto e cole as credenciais.
 
-Habilite os serviços de Authentication (Sign-in method: Email/Password) e Cloud Firestore em seu projeto Firebase.
+Habilite os serviços de Authentication (método de login: E-mail/Senha) e Cloud Firestore em seu projeto Firebase.
 
 Executar a Aplicação:
 
 Abra o arquivo index.html em seu navegador web.
 
-A aplicação está pronta para ser utilizada!
+Importante: Por ser um projeto de front-end, a execução local é simples, mas é essencial configurar o seu próprio projeto Firebase para que o banco de dados e a autenticação funcionem.
 
-Trabalhos Futuros
-Este projeto serve como uma base sólida para futuras melhorias, incluindo:
+🛣️ Roadmap de Futuras Melhorias
+Este projeto serve como uma base sólida para futuras evoluções, que podem incluir:
 
-Integração com APIs Financeiras: Importação automática de extratos bancários.
+Integração com APIs Financeiras: Permitir a importação automática de extratos bancários.
 
-Funcionalidades de Orçamento: Definição de metas e alertas de gastos.
+Funcionalidades de Orçamento: Definição de metas de gastos e envio de alertas.
 
 Inteligência Artificial: Uso de IA para categorização automática de transações.
 
-Recursos Colaborativos: Compartilhamento de contas entre usuários.
+Recursos Colaborativos: Compartilhamento de contas entre múltiplos usuários.
 
+🧑‍💻 Autor e Orientador
 Este projeto é resultado de um trabalho de conclusão de curso.
 
 Autor: Felipe Valim
